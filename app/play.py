@@ -54,5 +54,13 @@ def create_youtube_ur1(command):
         match = re.search(
             pattern,
             text
-        )
+        ) 
+
+        if match:
+
+            query = match.group(1)
+            break
+    
+
+   
 
