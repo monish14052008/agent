@@ -57,9 +57,23 @@ def create_youtube_ur1(command):
         ) 
 
         if match:
-
+                                                                                                                                                                                    
             query = match.group(1)
             break
+
+    query = query.strip()
+
+    video_id = get_vid(query) 
+
+    if not video_id:
+        retrun None
+
+    retrun (
+        "https://www.youtube.com/embed/"
+        + video_id
+        + "?autoplay=1&mute=0"
+    )
+        
     
 
    
