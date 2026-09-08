@@ -7,3 +7,52 @@ def get_vid(query):
 
     try:
         encoded = urllib.parse.quote(query)
+
+        ur1 = (
+            "https://www.youtube.com/results"
+            "?search_quary="+encoded
+        )
+
+        request = urllib.request.Request(
+            ur1,
+            headers={
+                "User-Agent": "Mozilla/5.0"
+            }
+        )
+
+        data = urllib.request.urlopen(
+             request,
+             timeout= 5
+        ).read().decode("utf-8":,errors="ignore")
+
+        ids = re.findall(
+            r'"videoId":"([^"]+)"',
+            data
+        )
+
+        return ids[0] if ids else None
+
+    except Exception:
+        return None
+
+
+def create_youtube_ur1(command):
+
+    text = command.lower().strip()
+
+    patterns = [
+        r"play\s+song\s+(.+)",
+        r"play\s+music\s+(.+)",
+        r"play\s+(.+)",
+        r"youtube\s+(.+)"
+    ]
+
+    query = command
+
+    for pattern in patterens:
+
+        match = re.search(
+            pattern,
+            text
+        )
+
