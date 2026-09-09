@@ -8,22 +8,22 @@ def get_vid(query):
     try:
         encoded = urllib.parse.quote(query)
 
-        ur1 = (
+        url = (
             "https://www.youtube.com/results"
-            "?search_quary="+encoded
+            "?search_query=" + encoded
         )
 
         request = urllib.request.Request(
-            ur1,
+            url,
             headers={
                 "User-Agent": "Mozilla/5.0"
             }
         )
 
         data = urllib.request.urlopen(
-             request,
-             timeout= 5
-        ).read().decode("utf-8":,errors="ignore")
+            request,
+            timeout=5
+        ).read().decode("utf-8", errors="ignore")
 
         ids = re.findall(
             r'"videoId":"([^"]+)"',
@@ -36,7 +36,7 @@ def get_vid(query):
         return None
 
 
-def create_youtube_ur1(command):
+def create_youtube_url(command):
 
     text = command.lower().strip()
 
@@ -49,30 +49,32 @@ def create_youtube_ur1(command):
 
     query = command
 
-    for pattern in patterens:
+    for pattern in patterns:
 
         match = re.search(
             pattern,
             text
-        ) 
+        )
 
         if match:
-                                                                                                                                                                                    
+
             query = match.group(1)
             break
 
     query = query.strip()
 
-    video_id = get_vid(query) 
+    video_id = get_vid(query)
 
     if not video_id:
-        retrun None
+        return None
 
-    retrun (
+    return (
         "https://www.youtube.com/embed/"
         + video_id
         + "?autoplay=1&mute=0"
     )
+
+   
         
     
 
