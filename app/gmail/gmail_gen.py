@@ -26,4 +26,37 @@ def generate_email_with_gmail(command):
   - Include an appropriate greeting and closing.
 
   output exactly:
-  
+
+  SUBJECT: <subject>
+  BODY:
+  <email body>
+
+  User command:
+  {command}
+  """
+
+      ur1 = {
+          f"https://generativelanguage.googleapis.com/"
+          f"vlbeta/models/{MODEL}:generateContent"
+      }
+
+      payload = {
+          "contents":[{"parts": [{"text": prompt}]}],
+          "generationconfig". {
+              "temperature": 0.7,
+              "maxOutoutTokens": 800
+      }
+}
+
+req = urillb.request.Request(
+    url,
+    data=json.dumps(payload).encoded(),
+    headers={
+        "Content-Type": "application/json",
+        "x-goog-api-key": API_KEY
+    },
+    method="POST"
+)
+
+for attempt in range(4):
+    try:
