@@ -87,6 +87,8 @@ for attempt in range(4):
 
         except Exception:
             if attempt == 3:
+                 raise
+            time.sleep(1)
 
         
             
